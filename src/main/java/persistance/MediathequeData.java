@@ -23,8 +23,14 @@ public class MediathequeData implements PersistentMediatheque {
      * @return la liste des documents disponibles
      */
     @Override
-    public List<Document> tousLesDocumentsDisponibles() {
-        return null;
+    public List<mediatek2022.Document> tousLesDocumentsDisponibles() {
+        List<mediatek2022.Document> docs = null;
+        try {
+            docs =  db.getDocumentsDispo();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return docs;
     }
 
     // va récupérer le User dans la BD et le renvoie
