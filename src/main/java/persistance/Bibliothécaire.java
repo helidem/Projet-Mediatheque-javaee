@@ -3,8 +3,8 @@ package persistance;
 public class Bibliothécaire extends Utilisateur {
 	
 
-	public Bibliothécaire(int id, String name, String password) {
-		super(id, name, password);
+	public Bibliothécaire(String login, String password) {
+		super(login, password);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -18,4 +18,5 @@ public class Bibliothécaire extends Utilisateur {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 }

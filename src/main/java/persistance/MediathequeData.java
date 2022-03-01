@@ -37,7 +37,7 @@ public class MediathequeData implements PersistentMediatheque {
     // si pas trouvé, renvoie null
     @Override
     public Utilisateur getUser(String login, String password) {
-        return null;
+        return db.getUser(login,password);
     }
 
     /**

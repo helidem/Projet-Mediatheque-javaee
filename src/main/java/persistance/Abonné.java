@@ -4,8 +4,8 @@ public class Abonné extends Utilisateur {
 	
 	
 	
-	public Abonné(String name, String password) {
-		super(name, password);
+	public Abonné(String login, String password) {
+		super(login, password);
 	}
 
 	@Override
@@ -18,4 +18,5 @@ public class Abonné extends Utilisateur {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 }
