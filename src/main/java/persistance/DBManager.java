@@ -12,7 +12,7 @@ public class DBManager {
     public DBManager() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            this.conn = DriverManager.getConnection("jdbc:mysql://localhost/mediatek", "root", "");
+            this.conn = DriverManager.getConnection("jdbc:mysql://localhost/mediatek", "root", "root");
         } catch (Exception e) {
             System.out.println("J'ARRIVE PAS A ACCEDER A LA BASE");
             e.printStackTrace();
@@ -65,7 +65,6 @@ public class DBManager {
                     fetchedUser = new persistance.Abonné(userLogin, userPassword);
                 }
             }
-            System.out.println(fetchedUser);
             return fetchedUser;
         } catch (SQLException e) {
             e.printStackTrace();
