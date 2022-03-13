@@ -15,7 +15,7 @@
             </div>
             <h1>Connexion</h1>
             <p>Bienvenue dans Mediatek2 !</p>
-                <%=  request.getSession().getAttribute("message") == null ? "":request.getSession().getAttribute("message") %>
+            <p class="login-error"><%=  request.getSession().getAttribute("message") == null ? "":request.getSession().getAttribute("message") %></p>
             <form class="flex-c" method="POST" action="login">
                 <div class="input-box">
                     <span class="label">Login</span>
@@ -95,6 +95,10 @@
     .login-text p {
         font-size: 15px;
         color: #000000b2;
+    }
+
+    .login-error {
+        color: red !important;
     }
 
     form {

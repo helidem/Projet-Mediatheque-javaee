@@ -32,7 +32,7 @@ public class LoginServlet extends HttpServlet {
 		try {
 			Utilisateur u = Mediatheque.getInstance().getUser(login, password);
 			if(u == null){
-				session.setAttribute("message","Erreur, utilisateur inconnu!");
+				session.setAttribute("message","Erreur, utilisateur inconnu !");
 				this.getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
 
 			}

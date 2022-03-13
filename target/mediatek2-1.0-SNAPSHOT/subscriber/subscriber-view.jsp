@@ -74,7 +74,7 @@
         </div>
     </div>
     <a href="http://google.com">
-        <img class="power-off-icon" src="power-icon.png" width="40" height="40"/></a>
+        <img class="power-off-icon" src="../assets/power-icon.png" width="40" height="40"/></a>
 </div>
 
 
