@@ -129,6 +129,18 @@ public class DBManager {
             e.printStackTrace();
         }
     }
+
+    public void addDocument(String titre, String auteur, String type, String description) {
+        try {
+            Statement stmt = conn.createStatement();
+            String request = "INSERT INTO Document VALUES ('" + titre + "', '" + auteur + "', '" + type + "', '" + description + "')";
+            ResultSet res = stmt.executeQuery(request);
+            System.out.println("Document '" + titre + "' de '" + auteur + "' ajouté");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
 // ne pas regarder en bas c degeu
 /*

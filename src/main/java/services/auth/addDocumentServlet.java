@@ -1,5 +1,7 @@
 package services.auth;
 
+import persistance.DBManager;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -37,6 +39,7 @@ public class addDocumentServlet extends HttpServlet {
             }
             System.out.println("titre : " + titre + ", auteur : " + auteur + ", type : " + type + ", description : " + description);
             session.setAttribute("message", "Opération réussie !");
+
             response.sendRedirect("librarian/librarian-view.jsp");
         } catch (Exception e) {
             e.printStackTrace();
