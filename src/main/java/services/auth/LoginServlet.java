@@ -38,6 +38,11 @@ public class LoginServlet extends HttpServlet {
 			}
 			System.out.println(u);
 			session.setAttribute("utilisateur",u); // dans le jsp getAttribute(...);
+			if(u.isBibliothecaire()){
+				response.sendRedirect("librarian/librarian-view.jsp");
+			} else {
+				response.sendRedirect("subscriber/subscriber-view.jsp");
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();

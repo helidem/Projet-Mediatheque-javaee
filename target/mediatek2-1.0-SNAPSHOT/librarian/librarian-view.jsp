@@ -67,7 +67,7 @@
     </div>
 </div>
 <div class="power-off-div">
-    <a href="http://google.com"><img class="power-off-icon" src="../power-icon.png" width="40" height="40"/></a>
+    <a href="http://google.com"><img class="power-off-icon" src="power-icon.png" width="40" height="40"/></a>
 </div>
 </body>
 
