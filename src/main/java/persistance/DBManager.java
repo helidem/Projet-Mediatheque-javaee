@@ -130,7 +130,7 @@ public class DBManager {
         }
     }
 
-    public void addDocument(String titre, String auteur, String type, String description) {
+    public void addDocument(String titre, String auteur, int type, String description) {
         try {
             Statement stmt = conn.createStatement();
             String request = "INSERT INTO Document VALUES ('" + titre + "', '" + auteur + "', '" + type + "', '" + description + "')";

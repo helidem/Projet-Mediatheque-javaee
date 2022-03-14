@@ -1,9 +1,5 @@
 package services.auth;
 
-import mediatek2022.Mediatheque;
-import persistance.DBManager;
-import persistance.MediathequeData;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,11 +7,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+public class borrowDocumentServlet extends HttpServlet {
 
-public class addDocumentServlet extends HttpServlet {
 
-
-    public addDocumentServlet() {
+    public borrowDocumentServlet() {
         super();
     }
 
@@ -39,11 +34,6 @@ public class addDocumentServlet extends HttpServlet {
                 session.setAttribute("message", "Erreur, informations manquantes !");
                 this.getServletContext().getRequestDispatcher("/librarian/librarian-view.jsp").forward(request, response);
             }
-            if(type == "livre")
-                type = "1";
-            else
-                type = "2";
-            Mediatheque.getInstance().ajoutDocument(Integer.parseInt(type), titre, auteur, description);
             System.out.println("titre : " + titre + ", auteur : " + auteur + ", type : " + type + ", description : " + description);
             session.setAttribute("message", "Opération réussie !");
 

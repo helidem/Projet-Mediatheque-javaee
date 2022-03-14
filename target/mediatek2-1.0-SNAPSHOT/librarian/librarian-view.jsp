@@ -57,12 +57,12 @@
                     <td>
                         <button type="submit">Submit</button>
                         <button type="reset">Reset</button>
-                        <p class="document-registration-error">
-                            <%=  request.getSession().getAttribute("message") == null ? "" : request.getSession().getAttribute("message") %>
-                        </p>
                     </td>
                 </tr>
             </table>
+            <p class="document-registration-error">
+                <%=  request.getSession().getAttribute("message") == null ? "" : request.getSession().getAttribute("message") %>
+            </p>
         </form>
     </div>
 </div>

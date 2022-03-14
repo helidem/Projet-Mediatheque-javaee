@@ -34,4 +34,15 @@
         <url-pattern>/addDocument</url-pattern>
     </servlet-mapping>
 
+    <!-- BORROW_DOCUMENT -->
+    <servlet>
+        <servlet-name>borrowDocument</servlet-name>
+        <servlet-class>services.auth.borrowDocumentServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>borrowDocument</servlet-name>
+        <url-pattern>/borrowDocument</url-pattern>
+    </servlet-mapping>
+
 </web-app>

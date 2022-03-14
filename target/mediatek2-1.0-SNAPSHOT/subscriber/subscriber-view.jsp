@@ -25,57 +25,64 @@
     </nav>
 </header>
 
+<div class="form-separator"></div>
 <div class="row">
-    <div class="main-container column">
-        <p>Emprunter un document</p>
-        <div class="row">
-            <div class="column">
-                <ul id="listFrom1" class="nav nav-pills nav-stacked">
-                    <li data-id="1" class="list-item"><a href="#">livre1</a></li>
-                    <li data-id="2" class="list-item"><a href="#">livre2</a></li>
-                    <li data-id="3" class="list-item"><a href="#">livre3</a></li>
-                    <li data-id="4" class="list-item"><a href="#">livre4</a></li>
-                </ul>
+    <form method="POST" action="../borrowDocument">
+        <div class="main-container column">
+            <p>Emprunter un document</p>
+            <div class="row">
+                <div class="column">
+                    <ul id="listFrom1" class="nav nav-pills nav-stacked">
+                        <!-- <% for(int i = 0; i < nbDocuments; i++) {}%> -->
+                        <li data-id="1" class="list-item"><a href="#">livre1</a></li>
+                        <li data-id="2" class="list-item"><a href="#">livre2</a></li>
+                        <li data-id="3" class="list-item"><a href="#">livre3</a></li>
+                        <li data-id="4" class="list-item"><a href="#">livre4</a></li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <ul id="listTo1" class="nav nav-pills nav-stacked"></ul>
+                </div>
             </div>
-            <div class="column">
-                <ul id="listTo1" class="nav nav-pills nav-stacked"></ul>
+            <br/>
+            <div class="row">
+                <div class="column">
+                    <input type="text" id="hidden1" class="form-control" readonly/>
+                </div>
+                <input type="submit" id="submit1" value="Emprunter" class="btn btn-success"/>
             </div>
         </div>
-        <br/>
-        <div class="row">
-            <div class="column">
-                <input type="text" id="hidden1" class="form-control" readonly/>
-            </div>
-            <input type="button" id="submit1" value="Emprunter" class="btn btn-success"/>
-        </div>
-    </div>
+    </form>
 
-    <div class="main-container column">
-        <p>Rendre un document</p>
-        <div class="row">
-            <div class="column">
-                <ul id="listFrom2" class="nav nav-pills nav-stacked">
-                    <li data-id="1" class="list-item"><a href="#">livre1</a></li>
-                    <li data-id="2" class="list-item"><a href="#">livre2</a></li>
-                    <li data-id="3" class="list-item"><a href="#">livre3</a></li>
-                    <li data-id="4" class="list-item"><a href="#">livre4</a></li>
-                </ul>
+    <form method="POST" action="../borrowDocument">
+        <div class="main-container column">
+            <p>Rendre un document</p>
+            <div class="row">
+                <div class="column">
+                    <ul id="listFrom2" class="nav nav-pills nav-stacked">
+                        <li data-id="1" class="list-item"><a href="#">livre1</a></li>
+                        <li data-id="2" class="list-item"><a href="#">livre2</a></li>
+                        <li data-id="3" class="list-item"><a href="#">livre3</a></li>
+                        <li data-id="4" class="list-item"><a href="#">livre4</a></li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <ul id="listTo2" class="nav nav-pills nav-stacked"></ul>
+                </div>
             </div>
-            <div class="column">
-                <ul id="listTo2" class="nav nav-pills nav-stacked"></ul>
+            <br/>
+            <div class="row">
+                <div class="column">
+                    <input type="text" id="hidden2" class="form-control" readonly/>
+                </div>
+                <input type="button" id="submit2" value="Rendre" class="btn btn-success"/>
             </div>
         </div>
-        <br/>
-        <div class="row">
-            <div class="column">
-                <input type="text" id="hidden2" class="form-control" readonly/>
-            </div>
-            <input type="button" id="submit2" value="Rendre" class="btn btn-success"/>
-        </div>
-    </div>
-    <a href="http://google.com">
-        <img class="power-off-icon" src="../assets/power-icon.png" width="40" height="40"/></a>
+    </form>
+
 </div>
+<a href="http://google.com">
+    <img class="power-off-icon" src="../assets/power-icon.png" width="40" height="40"/></a>
 
 
 </body>
