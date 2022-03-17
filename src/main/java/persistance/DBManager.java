@@ -133,7 +133,7 @@ public class DBManager {
     public void addDocument(String titre, String auteur, int type, String description) {
         try {
             Statement stmt = conn.createStatement();
-            String request = "INSERT INTO `document` (`Id`, `Disponible`, `Titre`, `Auteur`, `Type`, `Propriétaire`, `Description`) VALUES (LAST_INSERT_ID(), '0' , '" + titre + "', '" + auteur + "', '" + type + "', 'ayoub', '" + description + "')";
+            String request = "INSERT INTO `document` (`Id`, `Titre`, `Auteur`, `Type`, `Propriétaire`, `Description`) VALUES (NEXTVAL(seqiddocument), '" + titre + "', '" + auteur + "', '" + type + "', NULL, '" + description + "')";
             System.out.println(request);
             int res = stmt.executeUpdate(request);
             System.out.println("Document '" + titre + "' de '" + auteur + "' ajouté");
