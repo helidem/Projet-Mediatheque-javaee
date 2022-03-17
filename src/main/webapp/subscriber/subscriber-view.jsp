@@ -33,7 +33,6 @@
             <div class="row">
                 <div class="column">
                     <ul id="listFrom1" class="nav nav-pills nav-stacked">
-                        <!-- <% for(int i = 0; i < nbDocuments; i++) {}%> -->
                         <li data-id="1" class="list-item"><a href="#">livre1</a></li>
                         <li data-id="2" class="list-item"><a href="#">livre2</a></li>
                         <li data-id="3" class="list-item"><a href="#">livre3</a></li>
