@@ -45,7 +45,7 @@ public class MediathequeData implements PersistentMediatheque {
      */
     @Override
     public Document getDocument(int numDocument) {
-        return null;
+       return (Document) db.getDocumentByID(numDocument);
     }
 
     @Override

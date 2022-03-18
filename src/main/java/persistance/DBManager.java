@@ -130,10 +130,43 @@ public class DBManager {
         }
     }
 
+    public List<Document> getDocumentsByUser(String user) throws SQLException {
+        /*
+        Scanner scanner = new Scanner( System.in );
+        System.out.println("Entre la ville pour voir ses vols");
+        String ville = scanner.nextLine();
+        String req3 = "select numvol, villearrivee from vol where villedepart=?";
+        PreparedStatement pstm = conn.prepareStatement(req3);
+
+        pstm.setString(1,ville);
+        ResultSet res = pstm.executeQuery();
+
+
+        if(!res.next())
+            System.out.println("pas de vos partant de cette ville");
+        else do {
+            String numvol = res.getString("numvol");
+            String villearrivee = res.getString("villearrivee");
+            System.out.println(numvol + " -> " + villearrivee);
+        } while (res.next());*/
+        //List<persistance.Document>
+        String req = "select * from Document where Propriétaire=?";
+        PreparedStatement pstm = conn.prepareStatement(req);
+        pstm.setString(1,user);
+        ResultSet res = pstm.executeQuery();
+        if(!res.next()){
+            return null;
+        } else do {
+
+        } while(res.next());
+        return null;
+    }
+
+
     public void addDocument(String titre, String auteur, int type, String description) {
         try {
             Statement stmt = conn.createStatement();
-            String request = "INSERT INTO `document` (`Id`, `Titre`, `Auteur`, `Type`, `Propriétaire`, `Description`) VALUES (NEXTVAL(seqiddocument), '" + titre + "', '" + auteur + "', '" + type + "', NULL, '" + description + "')";
+            String request = "INSERT INTO `document` (`Titre`, `Auteur`, `Type`, `Propriétaire`, `Description`) VALUES ('" + titre + "', '" + auteur + "', '" + type + "', NULL, '" + description + "')";
             System.out.println(request);
             int res = stmt.executeUpdate(request);
             System.out.println("Document '" + titre + "' de '" + auteur + "' ajouté");

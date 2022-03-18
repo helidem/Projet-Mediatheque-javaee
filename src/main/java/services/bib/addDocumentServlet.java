@@ -1,4 +1,4 @@
-package services.auth;
+package services.bib;
 
 import mediatek2022.Mediatheque;
 import persistance.DBManager;

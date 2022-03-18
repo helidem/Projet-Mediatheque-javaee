@@ -24,6 +24,30 @@ public class Document implements mediatek2022.Document {
         return this.dispo;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public String getTitre() {
+        return titre;
+    }
+
+    public String getAuteur() {
+        return auteur;
+    }
+
+    public boolean isDispo() {
+        return dispo;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public String getProprietaire() {
+        return proprietaire;
+    }
+
     @Override
     public void emprunt(Utilisateur u) throws Exception {
         if(!this.dispo) {
@@ -31,6 +55,7 @@ public class Document implements mediatek2022.Document {
         } else {
             this.dispo = false;
         }
+        // TODO: mettre a jour dans la base
     }
 
     @Override
