@@ -1,5 +1,6 @@
 package persistance;
 
+import mediatek2022.Mediatheque;
 import mediatek2022.Utilisateur;
 
 public class Document implements mediatek2022.Document {

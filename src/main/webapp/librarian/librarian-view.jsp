@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -61,13 +62,13 @@
                 </tr>
             </table>
             <p class="document-registration-error">
-                <%=  request.getSession().getAttribute("message") == null ? "" : request.getSession().getAttribute("message") %>
+                <%=  request.getSession().getAttribute("messageAjoutDocument") == null ? "" : request.getSession().getAttribute("messageAjoutDocument") %>
             </p>
         </form>
     </div>
 </div>
 <div class="power-off-div">
-    <a href="http://google.com">
+    <a href="../">
         <img class="power-off-icon" src="../assets/power-icon.png" width="40" height="40"/>
     </a>
 </div>

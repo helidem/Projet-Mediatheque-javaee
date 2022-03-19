@@ -1,5 +1,6 @@
 <%@ page import="mediatek2022.Document" %>
 <%@ page import="java.util.List" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,10 +14,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css"
           integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous"/>
-
-    <link href="subscriber-view.css" rel="stylesheet"/>
-    <script src="subscriber-view.js"></script>
-
 </head>
 
 <body>
@@ -40,8 +37,8 @@
                     </a></li>
                     <% } %>
                 </ul>
-                <input type="text" name="documentAEmprunter" id="documentAEmprunter"
-                       value="numÈro du document ‡ emprunter">
+                <p>Num√©ro du document √† emprunter :</p>
+                <input type="text" name="documentAEmprunter" id="documentAEmprunter">
             </div>
             <br/>
             <div class="row">
@@ -49,86 +46,47 @@
                     <input type="text" id="hidden1" class="form-control" readonly/>
                     <input type="submit" id="submit1" value="Emprunter" class="btn btn-success"/>
                     <p>
-                        <%=  request.getSession().getAttribute("message") == null ? "" : request.getSession().getAttribute("message") %>
+                        <%=  request.getSession().getAttribute("messageEmprunt") == null ? "" : request.getSession().getAttribute("messageEmprunt") %>
                     </p>
                 </div>
             </div>
         </div>
     </form>
 
-    <form method="POST" action="../borrowDocument">
+    <form method="POST" action="../returnDocument">
         <div class="main-container column">
             <p>Rendre un document</p>
             <div class="column">
                 <ul id="listFrom2" class="nav nav-pills nav-stacked">
+                    <!-- Changer tousLesDocumentsDisponibles() en tousLesDocumentsARetourner(utilisateur) -->
                     <% List<Document> documentsARetourner = mediatek2022.Mediatheque.getInstance().tousLesDocumentsDisponibles();
                         for (Document document : documentsARetourner) { %>
                     <li data-id="1" class="list-item"><a href="#"><%= document.toString() %>
                     </a></li>
                     <% } %>
                 </ul>
-                <input type="text" name="documentARetourner" id="documentARetourner"
-                       value="numÈro du document ‡ retourner">
+                <p>Num√©ro du document √† retourner :</p>
+                <input type="text" name="documentARetourner" id="documentARetourner">
             </div>
             <br/>
-            <div class="row">
-                <div class="column">
-                    <input type="text" id="hidden2" class="form-control" readonly/>
-                </div>
-                <input type="button" id="submit2" value="Rendre" class="btn btn-success"/>
+            <div class="column">
+                <input type="text" id="hidden2" class="form-control" readonly/>
+                <input type="submit" id="submit2" value="Rendre" class="btn btn-success"/>
+                <p>
+                    <%=  request.getSession().getAttribute("messageRetour") == null ? "" : request.getSession().getAttribute("messageRetour") %>
+                </p>
             </div>
         </div>
     </form>
 
 </div>
-<a href="http://google.com">
+<a href="../">
     <img class="power-off-icon" src="../assets/power-icon.png" width="40" height="40"/></a>
 
 
 </body>
 
 </html>
-
-<script>
-    window.onload = function () {
-        $("#listTo1").sortable();
-        $("#listTo1").disableSelection();
-
-        $(document).on("click", "#listFrom1 li", function () {
-            $(this).unbind("click").appendTo("#listTo1");
-        });
-        $(document).on("click", "#listTo1 li", function () {
-            $(this).unbind("click").appendTo("#listFrom1");
-        });
-
-        $("#submit1").click(function () {
-            $("#hidden1").val("");
-            $("#listTo1 li").each(function () {
-                $("#hidden1").val($("#hidden1").val() + $(this).data("id") + ",");
-            });
-            $("#hidden1").val($("#hidden1").val().replace(/,\s*$/, ""));
-        });
-
-
-        $("#listTo2").sortable();
-        $("#listTo2").disableSelection();
-
-        $(document).on("click", "#listFrom2 li", function () {
-            $(this).unbind("click").appendTo("#listTo2");
-        });
-        $(document).on("click", "#listTo2 li", function () {
-            $(this).unbind("click").appendTo("#listFrom2");
-        });
-
-        $("#submit2").click(function () {
-            $("#hidden2").val("");
-            $("#listTo2 li").each(function () {
-                $("#hidden2").val($("#hidden2").val() + $(this).data("id") + ",");
-            });
-            $("#hidden2").val($("#hidden2").val().replace(/,\s*$/, ""));
-        });
-    };
-</script>
 
 <style>
     @import url("https://fonts.googleapis.com/css2?family=Fredoka&family=Press+Start+2P&display=swap");
@@ -262,7 +220,7 @@
 
     .form-separator {
         border-left: 2px solid black;
-        height: 500px;
+        height: 550px;
         position: absolute;
         top: 200px;
         left: 50%;

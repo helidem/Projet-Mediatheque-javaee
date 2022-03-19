@@ -50,13 +50,9 @@ public class MediathequeData implements PersistentMediatheque {
 
     @Override
     public void ajoutDocument(int type, Object... args) {
-        System.out.println(args[0]);
-        System.out.println(args[1]);
-        System.out.println(args[2]);
         db.addDocument((String) args[0],(String) args[1], type,(String) args[2]);
         // args[0] -> le titre
         // args [1] --> l'auteur
         // etc... variable suivant le type de document
     }
-
 }

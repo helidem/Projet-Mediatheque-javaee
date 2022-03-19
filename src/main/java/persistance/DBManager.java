@@ -123,7 +123,8 @@ public class DBManager {
     public void getDocumentBack() {
         try {
             Statement stmt = conn.createStatement();
-            String request = "UPDATE Document SET Disponible = 1 AND Propriétaire = 'NULL'";
+            //DISPONIBLE ETAIT EGAL A 1, J'AI CHANGé (AYOUB)
+            String request = "UPDATE Document SET Disponible = 0 AND Propriétaire = 'NULL'";
             ResultSet res = stmt.executeQuery(request);
         } catch (SQLException e) {
             e.printStackTrace();

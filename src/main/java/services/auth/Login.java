@@ -20,8 +20,6 @@ public class Login extends HttpServlet {
 		
 		try {
 			Utilisateur u = Mediatheque.getInstance().getUser(login, password);
-			
-			
 		} catch (Exception e) {
 			
 		}

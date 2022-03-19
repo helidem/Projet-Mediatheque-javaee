@@ -10,12 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.List;
 
-public class borrowDocumentServlet extends HttpServlet {
+public class returnDocumentServlet extends HttpServlet {
 
 
-    public borrowDocumentServlet() {
+    public returnDocumentServlet() {
         super();
     }
 
@@ -29,15 +28,15 @@ public class borrowDocumentServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Utilisateur u = (Utilisateur) session.getAttribute("utilisateur");
         System.out.println(u);
-        session.setAttribute("messageRetour", "");
         session.setAttribute("messageEmprunt", "");
+        session.setAttribute("messageRetour", "");
         // get document registration form information
-        String numeroDocument = request.getParameter("documentAEmprunter");
-        Document documentAEmprunter = Mediatheque.getInstance().getDocument(Integer.parseInt(numeroDocument));
-        System.out.println("Document : "+ documentAEmprunter);
+        String numeroDocument = request.getParameter("documentARetourner");
+        Document documentARetourner = Mediatheque.getInstance().getDocument(Integer.parseInt(numeroDocument));
+        System.out.println("Document : "+ documentARetourner);
         try {
-            Mediatheque.getInstance().emprunt(documentAEmprunter, u);
-            session.setAttribute("messageEmprunt", "Document N°" + numeroDocument + " emprunté !");
+            Mediatheque.getInstance().retour(documentARetourner, u);
+            session.setAttribute("messageRetour", "Document N°" + numeroDocument + " retourné !");
             response.sendRedirect("subscriber/subscriber-view.jsp");
         } catch (Exception e) {
             e.printStackTrace();

@@ -27,7 +27,7 @@ public class addDocumentServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // get session information
         HttpSession session = request.getSession();
-        session.setAttribute("message", "");
+        session.setAttribute("messageAjoutDocument", "");
         // get document registration form information
         String titre = request.getParameter("titre");
         String auteur = request.getParameter("auteur");
@@ -36,7 +36,7 @@ public class addDocumentServlet extends HttpServlet {
 
         try {
             if (titre == "" || auteur == "" || type == "") {
-                session.setAttribute("message", "Erreur, informations manquantes !");
+                session.setAttribute("messageAjoutDocument", "Erreur, informations manquantes !");
                 this.getServletContext().getRequestDispatcher("/librarian/librarian-view.jsp").forward(request, response);
             }
             if(type == "livre")
@@ -45,7 +45,7 @@ public class addDocumentServlet extends HttpServlet {
                 type = "2";
             Mediatheque.getInstance().ajoutDocument(Integer.parseInt(type), titre, auteur, description);
             System.out.println("titre : " + titre + ", auteur : " + auteur + ", type : " + type + ", description : " + description);
-            session.setAttribute("message", "Opération réussie !");
+            session.setAttribute("messageAjoutDocument", "Opération réussie !");
 
             response.sendRedirect("librarian/librarian-view.jsp");
         } catch (Exception e) {

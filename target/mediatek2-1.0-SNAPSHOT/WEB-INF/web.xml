@@ -45,4 +45,15 @@
         <url-pattern>/borrowDocument</url-pattern>
     </servlet-mapping>
 
+    <!-- RETURN_DOCUMENT -->
+    <servlet>
+        <servlet-name>returnDocument</servlet-name>
+        <servlet-class>services.abonne.returnDocumentServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>returnDocument</servlet-name>
+        <url-pattern>/returnDocument</url-pattern>
+    </servlet-mapping>
+
 </web-app>
