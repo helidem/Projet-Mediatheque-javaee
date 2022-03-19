@@ -34,7 +34,6 @@ public class borrowDocumentServlet extends HttpServlet {
         // get document registration form information
         String numeroDocument = request.getParameter("documentAEmprunter");
         Document documentAEmprunter = Mediatheque.getInstance().getDocument(Integer.parseInt(numeroDocument));
-        System.out.println("Document : "+ documentAEmprunter);
         try {
             Mediatheque.getInstance().emprunt(documentAEmprunter, u);
             session.setAttribute("messageEmprunt", "Document N°" + numeroDocument + " emprunté !");

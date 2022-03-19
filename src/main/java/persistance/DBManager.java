@@ -1,7 +1,5 @@
 package persistance;
 
-import mediatek2022.Document;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -73,8 +71,8 @@ public class DBManager {
     }
 
     // getDocumentsDispo
-    public List<Document> getDocumentsDispo() throws Exception {
-        List<Document> docs = new ArrayList<>();
+    public List<mediatek2022.Document> getDocumentsDispo() throws Exception {
+        List<mediatek2022.Document> docs = new ArrayList<>();
 
         // requete sql
         String req = "SELECT * FROM Document WHERE Disponible = 1";
@@ -123,8 +121,17 @@ public class DBManager {
     public void getDocumentBack() {
         try {
             Statement stmt = conn.createStatement();
-            //DISPONIBLE ETAIT EGAL A 1, J'AI CHANGé (AYOUB)
-            String request = "UPDATE Document SET Disponible = 0 AND Propriétaire = 'NULL'";
+            String request = "UPDATE Document SET Disponible = 1 AND Propriétaire = 'NULL'";
+            ResultSet res = stmt.executeQuery(request);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void giveDocumentTo(Document d, Utilisateur u) {
+        try {
+            Statement stmt = conn.createStatement();
+            String request = "UPDATE Document WHERE id = " + d.getId() + " SET Disponible = 0 AND Propriétaire = '" + u.name() + "'";
             ResultSet res = stmt.executeQuery(request);
         } catch (SQLException e) {
             e.printStackTrace();

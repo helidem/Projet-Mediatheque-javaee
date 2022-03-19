@@ -3,6 +3,8 @@ package persistance;
 import mediatek2022.Mediatheque;
 import mediatek2022.Utilisateur;
 
+import javax.print.attribute.standard.Media;
+
 public class Document implements mediatek2022.Document {
     private int id;
     private String titre;
@@ -51,10 +53,11 @@ public class Document implements mediatek2022.Document {
 
     @Override
     public void emprunt(Utilisateur u) throws Exception {
-        if(!this.dispo) {
+        if(this.dispo == false) {
             throw new IndispoException();
         } else {
             this.dispo = false;
+            Mediatheque.getInstance().emprunt(this, u);
         }
         // TODO: mettre a jour dans la base
     }

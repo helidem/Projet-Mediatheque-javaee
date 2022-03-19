@@ -55,4 +55,8 @@ public class MediathequeData implements PersistentMediatheque {
         // args [1] --> l'auteur
         // etc... variable suivant le type de document
     }
+
+    public void emprunt(Document d, Utilisateur u) {
+        db.giveDocumentTo(d, u);
+    }
 }
