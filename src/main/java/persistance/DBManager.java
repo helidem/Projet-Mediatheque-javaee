@@ -103,8 +103,8 @@ public class DBManager {
     public void retournerDocument() {
         try {
             Statement stmt = conn.createStatement();
-            String request = "UPDATE Document SET Disponible = 1 AND Propriétaire = 'NULL'";
-            ResultSet res = stmt.executeQuery(request);
+            String request = "UPDATE Document SET Disponible = 1 AND Propriétaire IS NULL";
+            int res = stmt.executeUpdate(request);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -115,6 +115,7 @@ public class DBManager {
         try {
             Statement stmt = conn.createStatement();
             String request = "UPDATE Document SET Disponible = 0 AND Propriétaire = '" + u.name() + "'WHERE id ="+ d.getId();
+            System.out.println(u.name());
             int res = stmt.executeUpdate(request);
         } catch (SQLException e) {
             e.printStackTrace();

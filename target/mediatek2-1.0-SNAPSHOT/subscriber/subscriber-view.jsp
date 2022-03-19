@@ -28,15 +28,8 @@
 <div class="row">
     <form method="POST" action="../borrowDocument">
         <div class="main-container column">
-            <p>Emprunter un document</p>
+            <h2>Emprunter un document</h2>
             <div class="column">
-                <ul id="listFrom1" class="nav nav-pills nav-stacked">
-                    <% List<Document> documentsAEmprunter = mediatek2022.Mediatheque.getInstance().tousLesDocumentsDisponibles();
-                        for (Document document : documentsAEmprunter) { %>
-                    <li data-id="1" class="list-item"><a href="#"><%= document.toString() %>
-                    </a></li>
-                    <% } %>
-                </ul>
                 <p>Numéro du document à emprunter :</p>
                 <input type="text" name="documentAEmprunter" id="documentAEmprunter">
             </div>
@@ -55,16 +48,8 @@
 
     <form method="POST" action="../returnDocument">
         <div class="main-container column">
-            <p>Rendre un document</p>
+            <h2>Rendre un document</h2>
             <div class="column">
-                <ul id="listFrom2" class="nav nav-pills nav-stacked">
-                    <!-- Changer tousLesDocumentsDisponibles() en tousLesDocumentsARetourner(utilisateur) -->
-                    <% List<Document> documentsARetourner = mediatek2022.Mediatheque.getInstance().tousLesDocumentsDisponibles();
-                        for (Document document : documentsARetourner) { %>
-                    <li data-id="1" class="list-item"><a href="#"><%= document.toString() %>
-                    </a></li>
-                    <% } %>
-                </ul>
                 <p>Numéro du document à retourner :</p>
                 <input type="text" name="documentARetourner" id="documentARetourner">
             </div>

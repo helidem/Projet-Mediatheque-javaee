@@ -1,5 +1,6 @@
 package persistance;
 
+import mediatek2022.Mediatheque;
 import mediatek2022.Utilisateur;
 
 public class Document implements mediatek2022.Document {
@@ -61,9 +62,14 @@ public class Document implements mediatek2022.Document {
 
     @Override
     public void retour() {
-        if(!this.dispo)
-            this.dispo = true;
-        // else emprunt();
+        try {
+            if (!this.dispo) {
+                this.dispo = true;
+                db.retournerDocument();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

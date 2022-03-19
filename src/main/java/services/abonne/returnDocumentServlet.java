@@ -37,6 +37,7 @@ public class returnDocumentServlet extends HttpServlet {
         try {
             Mediatheque.getInstance().retour(documentARetourner, u);
             session.setAttribute("messageRetour", "Document N°" + numeroDocument + " retourné !");
+            response.sendRedirect("subscriber/subscriber-view.jsp");
         } catch (Exception e) {
             session.setAttribute("messageRetour", "Vous n'êtes pas en possession du document N°" + numeroDocument + " !");
             response.sendRedirect("subscriber/subscriber-view.jsp");
