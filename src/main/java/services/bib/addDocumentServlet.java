@@ -18,8 +18,7 @@ public class addDocumentServlet extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // this.getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
-        System.out.println("DANS LE doGet");
+
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,12 +36,11 @@ public class addDocumentServlet extends HttpServlet {
                 session.setAttribute("messageAjoutDocument", "Erreur, informations manquantes !");
                 this.getServletContext().getRequestDispatcher("/librarian/librarian-view.jsp").forward(request, response);
             }
-            if(type == "livre")
+            if (type == "livre")
                 type = "1";
             else
                 type = "2";
             Mediatheque.getInstance().ajoutDocument(Integer.parseInt(type), titre, auteur, description);
-            System.out.println("titre : " + titre + ", auteur : " + auteur + ", type : " + type + ", description : " + description);
             session.setAttribute("messageAjoutDocument", "Opération réussie !");
 
             response.sendRedirect("librarian/librarian-view.jsp");

@@ -20,15 +20,13 @@ public class borrowDocumentServlet extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // this.getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
-        System.out.println("DANS LE doGet");
+
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // get session information
         HttpSession session = request.getSession();
         Utilisateur u = (Utilisateur) session.getAttribute("utilisateur");
-        System.out.println(u);
         session.setAttribute("messageRetour", "");
         session.setAttribute("messageEmprunt", "");
         // get document registration form information

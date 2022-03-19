@@ -103,7 +103,7 @@ public class DBManager {
     public void retournerDocument() {
         try {
             Statement stmt = conn.createStatement();
-            String request = "UPDATE Document SET Disponible = 1 AND Propriétaire IS NULL";
+            String request = "UPDATE Document SET Disponible = 1, Propriétaire = NULL";
             int res = stmt.executeUpdate(request);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -114,7 +114,8 @@ public class DBManager {
     public void emprunt(Document d, Utilisateur u) {
         try {
             Statement stmt = conn.createStatement();
-            String request = "UPDATE Document SET Disponible = 0 AND Propriétaire = '" + u.name() + "'WHERE id ="+ d.getId();
+            String request = "UPDATE Document SET Disponible = 0, Propriétaire = '" + u.name() + "' WHERE id = "+ d.getId();
+            System.out.println(request);
             System.out.println(u.name());
             int res = stmt.executeUpdate(request);
         } catch (SQLException e) {
@@ -126,9 +127,7 @@ public class DBManager {
         try {
             Statement stmt = conn.createStatement();
             String request = "INSERT INTO `document` (`Titre`, `Auteur`, `Type`, `Propriétaire`, `Description`) VALUES ('" + titre + "', '" + auteur + "', '" + type + "', NULL, '" + description + "')";
-            System.out.println(request);
             int res = stmt.executeUpdate(request);
-            System.out.println("Document '" + titre + "' de '" + auteur + "' ajouté");
         } catch (SQLException e) {
             e.printStackTrace();
         }

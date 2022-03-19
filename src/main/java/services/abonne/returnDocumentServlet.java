@@ -19,21 +19,17 @@ public class returnDocumentServlet extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // this.getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
-        System.out.println("DANS LE doGet");
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // get session information
         HttpSession session = request.getSession();
         Utilisateur u = (Utilisateur) session.getAttribute("utilisateur");
-        System.out.println(u);
         session.setAttribute("messageEmprunt", "");
         session.setAttribute("messageRetour", "");
         // get document registration form information
         String numeroDocument = request.getParameter("documentARetourner");
         Document documentARetourner = Mediatheque.getInstance().getDocument(Integer.parseInt(numeroDocument));
-        System.out.println("Document : " + documentARetourner);
         try {
             Mediatheque.getInstance().retour(documentARetourner, u);
             session.setAttribute("messageRetour", "Document N°" + numeroDocument + " retourné !");

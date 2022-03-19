@@ -17,8 +17,6 @@ public class LoginServlet extends HttpServlet {
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 // this.getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
-		 System.out.println("DANS LE DOGET");
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException{
@@ -36,7 +34,6 @@ public class LoginServlet extends HttpServlet {
 				this.getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
 
 			}
-			System.out.println(u);
 			session.setAttribute("utilisateur",u); // dans le jsp getAttribute(...);
 			if(u.isBibliothecaire()){
 				response.sendRedirect("librarian/librarian-view.jsp");
@@ -47,6 +44,5 @@ public class LoginServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		// this.getServletContext().getRequestDispatcher("/login.jsp").forward(request, response); // il faut le mettre plus tôt
 	}
 }
