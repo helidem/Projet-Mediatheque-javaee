@@ -56,7 +56,10 @@ public class MediathequeData implements PersistentMediatheque {
         // etc... variable suivant le type de document
     }
 
-    public void emprunt(Document d, Utilisateur u) {
-        db.giveDocumentTo(d, u);
+
+    public void emprunt(Document d, Utilisateur u) throws Exception {
+        d.emprunt(u);
+        db.emprunt(d, u);
+
     }
 }

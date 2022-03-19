@@ -1,8 +1,6 @@
 package services.bib;
 
 import mediatek2022.Mediatheque;
-import persistance.DBManager;
-import persistance.MediathequeData;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

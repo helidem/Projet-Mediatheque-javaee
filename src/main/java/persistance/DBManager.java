@@ -5,6 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DBManager {
+    static {
+        instance = new DBManager();
+    }
+    public static DBManager getInstance(){
+        return instance;
+    }
+    private static DBManager instance;
     private Connection conn;
 
     public DBManager() {
@@ -92,33 +99,8 @@ public class DBManager {
         return docs;
     }
 
-    // getAllUsers
-    public List<Utilisateur> getAllUsers() {
-        try {
-            List<Utilisateur> fetchedUsers = new ArrayList<>();
-            Statement stmt = conn.createStatement();
-            String request = "SELECT * FROM Utilisateur ORDER BY login";
-            ResultSet res = stmt.executeQuery(request);
-            while (res.next()) {
-                boolean isBibliothecaire = res.getBoolean("Bib");
-                String userLogin = res.getString("login");
-                String userPassword = res.getString("password");
-                if (isBibliothecaire) {
-                    fetchedUsers.add(new persistance.Bibliothécaire(userLogin, userPassword));
-                } else {
-                    fetchedUsers.add(new persistance.Abonné(userLogin, userPassword));
-                }
-            }
-            System.out.println(fetchedUsers);
-            return fetchedUsers;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
     // returnDocument
-    public void getDocumentBack() {
+    public void retournerDocument() {
         try {
             Statement stmt = conn.createStatement();
             String request = "UPDATE Document SET Disponible = 1 AND Propriétaire = 'NULL'";
@@ -128,48 +110,16 @@ public class DBManager {
         }
     }
 
-    public void giveDocumentTo(Document d, Utilisateur u) {
+    // emprunt
+    public void emprunt(Document d, Utilisateur u) {
         try {
             Statement stmt = conn.createStatement();
-            String request = "UPDATE Document WHERE id = " + d.getId() + " SET Disponible = 0 AND Propriétaire = '" + u.name() + "'";
-            ResultSet res = stmt.executeQuery(request);
+            String request = "UPDATE Document SET Disponible = 0 AND Propriétaire = '" + u.name() + "'WHERE id ="+ d.getId();
+            int res = stmt.executeUpdate(request);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
-    public List<Document> getDocumentsByUser(String user) throws SQLException {
-        /*
-        Scanner scanner = new Scanner( System.in );
-        System.out.println("Entre la ville pour voir ses vols");
-        String ville = scanner.nextLine();
-        String req3 = "select numvol, villearrivee from vol where villedepart=?";
-        PreparedStatement pstm = conn.prepareStatement(req3);
-
-        pstm.setString(1,ville);
-        ResultSet res = pstm.executeQuery();
-
-
-        if(!res.next())
-            System.out.println("pas de vos partant de cette ville");
-        else do {
-            String numvol = res.getString("numvol");
-            String villearrivee = res.getString("villearrivee");
-            System.out.println(numvol + " -> " + villearrivee);
-        } while (res.next());*/
-        //List<persistance.Document>
-        String req = "select * from Document where Propriétaire=?";
-        PreparedStatement pstm = conn.prepareStatement(req);
-        pstm.setString(1,user);
-        ResultSet res = pstm.executeQuery();
-        if(!res.next()){
-            return null;
-        } else do {
-
-        } while(res.next());
-        return null;
-    }
-
 
     public void addDocument(String titre, String auteur, int type, String description) {
         try {
@@ -184,64 +134,3 @@ public class DBManager {
 
     }
 }
-// ne pas regarder en bas c degeu
-/*
-        // on configule le driver
-        Class.forName("oracle.jdbc.OracleDriver");
-
-        // on se connecte à la base
-        Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "etudiant", "ETUDIANT");
-
-        /* exo 1
-        // on crée la requete
-        String req1 = "SELECT matricule, nom, age from pilote";
-        Statement stmt = conn.createStatement();
-
-        // on recupere le resultat et on le parcourt
-        ResultSet res = stmt.executeQuery(req1);
-        while(res.next()){
-            int matricule = res.getInt("matricule");
-            String nom = res.getString("nom");
-            int age = res.getInt("age");
-            System.out.println("Nom : " + nom + ", age : " + age + ", matricule : " + matricule);
-        }*/
-
-// exo 2
-        /*
-        Scanner scanner = new Scanner( System.in );
-        System.out.println("Entre la ville pour voir ses vols");
-        String ville = scanner.nextLine();
-        String req2 = "select numvol, villearrivee from vol where villedepart='" + ville + "'";
-        Statement stmt = conn.createStatement();
-
-        ResultSet res = stmt.executeQuery(req2);
-
-
-        if(!res.next())
-            System.out.println("pas de vos partant de cette ville");
-        else do {
-            String numvol = res.getString("numvol");
-            String villearrivee = res.getString("villearrivee");
-            System.out.println(numvol + " -> " + villearrivee);
-        } while (res.next());*/
-
-// exo 3 c'est presque la mm chose mais avec les prepared statement
-        /*
-        Scanner scanner = new Scanner( System.in );
-        System.out.println("Entre la ville pour voir ses vols");
-        String ville = scanner.nextLine();
-        String req3 = "select numvol, villearrivee from vol where villedepart=?";
-        PreparedStatement pstm = conn.prepareStatement(req3);
-
-        pstm.setString(1,ville);
-        ResultSet res = pstm.executeQuery();
-
-
-        if(!res.next())
-            System.out.println("pas de vos partant de cette ville");
-        else do {
-            String numvol = res.getString("numvol");
-            String villearrivee = res.getString("villearrivee");
-            System.out.println(numvol + " -> " + villearrivee);
-        } while (res.next());*/
-
