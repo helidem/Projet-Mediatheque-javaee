@@ -33,13 +33,13 @@ public class returnDocumentServlet extends HttpServlet {
         // get document registration form information
         String numeroDocument = request.getParameter("documentARetourner");
         Document documentARetourner = Mediatheque.getInstance().getDocument(Integer.parseInt(numeroDocument));
-        System.out.println("Document : "+ documentARetourner);
+        System.out.println("Document : " + documentARetourner);
         try {
             Mediatheque.getInstance().retour(documentARetourner, u);
             session.setAttribute("messageRetour", "Document N°" + numeroDocument + " retourné !");
-            response.sendRedirect("subscriber/subscriber-view.jsp");
         } catch (Exception e) {
-            e.printStackTrace();
+            session.setAttribute("messageRetour", "Vous n'êtes pas en possession du document N°" + numeroDocument + " !");
+            response.sendRedirect("subscriber/subscriber-view.jsp");
         }
         // this.getServletContext().getRequestDispatcher("/login.jsp").forward(request, response); // il faut le mettre plus tôt
     }

@@ -40,7 +40,8 @@ public class borrowDocumentServlet extends HttpServlet {
             session.setAttribute("messageEmprunt", "Document N°" + numeroDocument + " emprunté !");
             response.sendRedirect("subscriber/subscriber-view.jsp");
         } catch (Exception e) {
-            e.printStackTrace();
+            session.setAttribute("messageEmprunt", "Document N°" + numeroDocument + " indisponible !");
+            response.sendRedirect("subscriber/subscriber-view.jsp");
         }
         // this.getServletContext().getRequestDispatcher("/login.jsp").forward(request, response); // il faut le mettre plus tôt
     }
