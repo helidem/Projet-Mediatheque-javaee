@@ -39,12 +39,13 @@ public class addDocumentServlet extends HttpServlet {
                 type = "2";
             m.ajoutDocument(Integer.parseInt(type), titre, auteur, description);
             session.setAttribute("messageAjoutDocument", "Opération réussie !");
-            response.sendRedirect("librarian/librarian-view.jsp");
+
 
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendRedirect("librarian/librarian-view.jsp");
+
         }
+        response.sendRedirect("librarian/librarian-view.jsp");
 
     }
 }
