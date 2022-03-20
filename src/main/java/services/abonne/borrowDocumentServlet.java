@@ -19,11 +19,8 @@ public class borrowDocumentServlet extends HttpServlet {
         super();
     }
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Mediatheque m = Mediatheque.getInstance();
         // get session information
         HttpSession session = request.getSession();
         Utilisateur u = (Utilisateur) session.getAttribute("utilisateur");
@@ -31,15 +28,13 @@ public class borrowDocumentServlet extends HttpServlet {
         session.setAttribute("messageEmprunt", "");
         // get document registration form information
         String numeroDocument = request.getParameter("documentAEmprunter");
-        Document documentAEmprunter = Mediatheque.getInstance().getDocument(Integer.parseInt(numeroDocument));
+        Document documentAEmprunter = m.getDocument(Integer.parseInt(numeroDocument));
         try {
-            Mediatheque.getInstance().emprunt(documentAEmprunter, u);
+            m.emprunt(documentAEmprunter, u);
             session.setAttribute("messageEmprunt", "Document N°" + numeroDocument + " emprunté !");
-            response.sendRedirect("subscriber/subscriber-view.jsp");
         } catch (Exception e) {
             session.setAttribute("messageEmprunt", "Document N°" + numeroDocument + " indisponible !");
-            response.sendRedirect("subscriber/subscriber-view.jsp");
         }
-        // this.getServletContext().getRequestDispatcher("/login.jsp").forward(request, response); // il faut le mettre plus tôt
+        response.sendRedirect("subscriber/subscriber-view.jsp");
     }
 }

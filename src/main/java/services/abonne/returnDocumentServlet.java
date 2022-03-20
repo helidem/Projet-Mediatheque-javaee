@@ -18,10 +18,9 @@ public class returnDocumentServlet extends HttpServlet {
         super();
     }
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Mediatheque m = Mediatheque.getInstance();
         // get session information
         HttpSession session = request.getSession();
         Utilisateur u = (Utilisateur) session.getAttribute("utilisateur");
@@ -29,15 +28,15 @@ public class returnDocumentServlet extends HttpServlet {
         session.setAttribute("messageRetour", "");
         // get document registration form information
         String numeroDocument = request.getParameter("documentARetourner");
-        Document documentARetourner = Mediatheque.getInstance().getDocument(Integer.parseInt(numeroDocument));
+        Document documentARetourner = m.getDocument(Integer.parseInt(numeroDocument));
         try {
-            Mediatheque.getInstance().retour(documentARetourner, u);
+            m.retour(documentARetourner, u);
             session.setAttribute("messageRetour", "Document N°" + numeroDocument + " retourné !");
-            response.sendRedirect("subscriber/subscriber-view.jsp");
+
         } catch (Exception e) {
             session.setAttribute("messageRetour", "Vous n'êtes pas en possession du document N°" + numeroDocument + " !");
-            response.sendRedirect("subscriber/subscriber-view.jsp");
         }
+        response.sendRedirect("subscriber/subscriber-view.jsp");
         // this.getServletContext().getRequestDispatcher("/login.jsp").forward(request, response); // il faut le mettre plus tôt
     }
 }

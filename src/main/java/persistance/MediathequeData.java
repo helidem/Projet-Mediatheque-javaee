@@ -23,8 +23,8 @@ public class MediathequeData implements PersistentMediatheque {
      * @return la liste des documents disponibles
      */
     @Override
-    public List<mediatek2022.Document> tousLesDocumentsDisponibles() {
-        List<mediatek2022.Document> docs = null;
+    public List<Document> tousLesDocumentsDisponibles() {
+        List<Document> docs = null;
         try {
             docs =  db.getDocumentsDispo();
         } catch (Exception e) {
@@ -44,8 +44,8 @@ public class MediathequeData implements PersistentMediatheque {
      * @param numDocument le numéro du document
      */
     @Override
-    public Document getDocument(int numDocument) {
-       return (Document) db.getDocumentByID(numDocument);
+    public PersistantDocument getDocument(int numDocument) {
+       return db.getDocumentByID(numDocument);
     }
 
     @Override

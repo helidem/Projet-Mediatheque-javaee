@@ -1,9 +1,8 @@
 package persistance;
 
-import mediatek2022.Mediatheque;
 import mediatek2022.Utilisateur;
 
-public class Document implements mediatek2022.Document {
+public class PersistantDocument implements mediatek2022.Document {
     private int id;
     private String titre;
     private String auteur;
@@ -11,7 +10,7 @@ public class Document implements mediatek2022.Document {
     private int type;
     private String proprietaire;
     private static DBManager db = DBManager.getInstance();
-    public Document(int id, String titre, String auteur, boolean dispo, int type, String proprietaire) {
+    public PersistantDocument(int id, String titre, String auteur, boolean dispo, int type, String proprietaire) {
         this.id = id;
         this.titre = titre;
         this.auteur = auteur;
@@ -27,26 +26,6 @@ public class Document implements mediatek2022.Document {
 
     public int getId() {
         return id;
-    }
-
-    public String getTitre() {
-        return titre;
-    }
-
-    public String getAuteur() {
-        return auteur;
-    }
-
-    public boolean isDispo() {
-        return dispo;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public String getProprietaire() {
-        return proprietaire;
     }
 
     @Override

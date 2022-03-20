@@ -18,10 +18,6 @@ public abstract class Utilisateur implements mediatek2022.Utilisateur{
 		return this.login;
 	}
 	
-	public String getPassword() {
-		return this.password;
-	}
-
 	@Override
 	public String toString() {
 		return "Utilisateur{" +

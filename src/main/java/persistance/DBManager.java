@@ -1,5 +1,7 @@
 package persistance;
 
+import mediatek2022.Document;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +26,13 @@ public class DBManager {
         }
     }
 
-    // getfromDocumentid
-    public Document getDocumentByID(int id) {
-        Document fetchedDocument = null;
+    /**
+     * Retourne un document à partir de l'identifiant fourni
+     * @param id l'id du document qu'on cherche a obtenir
+     * @return l'objet Document recherché
+     */
+    public PersistantDocument getDocumentByID(int id) {
+        PersistantDocument fetchedDocument = null;
         try {
             String request = "SELECT * FROM DOCUMENT WHERE Id = ?";
             PreparedStatement pstm = conn.prepareStatement(request);
@@ -38,7 +44,7 @@ public class DBManager {
                 String auteur = res.getString("Auteur");
                 int type = res.getInt("Type");
                 String proprietaire = res.getString("Propriétaire");
-                fetchedDocument = new persistance.Document(id, titre, auteur, dispo, type, proprietaire);
+                fetchedDocument = new PersistantDocument(id, titre, auteur, dispo, type, proprietaire);
             }
             System.out.println(fetchedDocument);
             return fetchedDocument;
@@ -48,7 +54,12 @@ public class DBManager {
         return null;
     }
 
-    // connect
+    /**
+     * Retourne un Utilisateur a partir de son login et mot de passe
+     * @param login le login de l'Utilisateur
+     * @param password le mot de passe de l'Utilisateur
+     * @return l'objet Utilisateur
+     */
     public Utilisateur getUser(String login, String password) {
         Utilisateur fetchedUser = null;
         try {
@@ -77,9 +88,13 @@ public class DBManager {
         return null;
     }
 
-    // getDocumentsDispo
-    public List<mediatek2022.Document> getDocumentsDispo() throws Exception {
-        List<mediatek2022.Document> docs = new ArrayList<>();
+    /**
+     * Retourne une List de tous les documents qui ne sont pas actuellement empruntés par quelqu'un
+     * @return La List en question
+     * @throws Exception
+     */
+    public List<Document> getDocumentsDispo() throws Exception {
+        List<Document> docs = new ArrayList<>();
 
         // requete sql
         String req = "SELECT * FROM Document WHERE Disponible = 1";
@@ -94,12 +109,14 @@ public class DBManager {
             String auteur = res.getString("Auteur");
             int type = res.getInt("Type");
             String proprietaire = res.getString("Propriétaire");
-            docs.add(new persistance.Document(id, titre, auteur, dispo, type, proprietaire));
+            docs.add(new PersistantDocument(id, titre, auteur, dispo, type, proprietaire));
         }
         return docs;
     }
 
-    // returnDocument
+    /**
+     * Permet de retoutner un document, il ne se passe rien si le document est empruntable
+     */
     public void retournerDocument() {
         try {
             Statement stmt = conn.createStatement();
@@ -110,24 +127,41 @@ public class DBManager {
         }
     }
 
-    // emprunt
-    public void emprunt(Document d, Utilisateur u) {
+    /**
+     * Cette fonction permet à l'Utilisateur d'emprunter un Document
+     * @param d le document à emprunter
+     * @param u l'utilisateur qui emprunte
+     */
+    public void emprunt(PersistantDocument d, Utilisateur u) {
         try {
-            Statement stmt = conn.createStatement();
-            String request = "UPDATE Document SET Disponible = 0, Propriétaire = '" + u.name() + "' WHERE id = "+ d.getId();
+            String request = "UPDATE Document SET Disponible = 0, Propriétaire = ? WHERE id = ?";
             System.out.println(request);
             System.out.println(u.name());
-            int res = stmt.executeUpdate(request);
+            PreparedStatement pstm = conn.prepareStatement(request);
+            pstm.setString(1,u.name());
+            pstm.setInt(2,d.getId());
+            pstm.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Cette méthode permet aux bibliothecaires d'ajouter un document à la base
+     * @param titre le titre du document
+     * @param auteur l'auteur du document
+     * @param type le type du document (cd ou livre)
+     * @param description la description du document
+     */
     public void addDocument(String titre, String auteur, int type, String description) {
         try {
-            Statement stmt = conn.createStatement();
-            String request = "INSERT INTO `document` (`Titre`, `Auteur`, `Type`, `Propriétaire`, `Description`) VALUES ('" + titre + "', '" + auteur + "', '" + type + "', NULL, '" + description + "')";
-            int res = stmt.executeUpdate(request);
+            String request = "INSERT INTO `document` (`Titre`, `Auteur`, `Type`, `Propriétaire`, `Description`) VALUES (?, ?, ?, NULL, ?)";
+            PreparedStatement pstm = conn.prepareStatement(request);
+            pstm.setString(1,titre);
+            pstm.setString(2,auteur);
+            pstm.setInt(3,type);
+            pstm.setString(4,description);
+            pstm.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
