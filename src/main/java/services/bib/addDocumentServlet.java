@@ -31,7 +31,7 @@ public class addDocumentServlet extends HttpServlet {
         try {
             if (titre == "" || auteur == "" || type == "") {
                 session.setAttribute("messageAjoutDocument", "Erreur, informations manquantes !");
-                this.getServletContext().getRequestDispatcher("/librarian/librarian-view.jsp").forward(request, response);
+                this.getServletContext().getRequestDispatcher("librarian/librarian-view.jsp").forward(request, response);
             }
             if (type.equals("livre"))
                 type = "1";
@@ -39,10 +39,12 @@ public class addDocumentServlet extends HttpServlet {
                 type = "2";
             m.ajoutDocument(Integer.parseInt(type), titre, auteur, description);
             session.setAttribute("messageAjoutDocument", "Opération réussie !");
+            response.sendRedirect("librarian/librarian-view.jsp");
 
         } catch (Exception e) {
             e.printStackTrace();
+            response.sendRedirect("librarian/librarian-view.jsp");
         }
-        response.sendRedirect("librarian/librarian-view.jsp");
+
     }
 }

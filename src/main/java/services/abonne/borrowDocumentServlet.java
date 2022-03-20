@@ -28,8 +28,9 @@ public class borrowDocumentServlet extends HttpServlet {
         session.setAttribute("messageEmprunt", "");
         // get document registration form information
         String numeroDocument = request.getParameter("documentAEmprunter");
-        Document documentAEmprunter = m.getDocument(Integer.parseInt(numeroDocument));
+
         try {
+            Document documentAEmprunter = m.getDocument(Integer.parseInt(numeroDocument));
             m.emprunt(documentAEmprunter, u);
             session.setAttribute("messageEmprunt", "Document N°" + numeroDocument + " emprunté !");
         } catch (Exception e) {

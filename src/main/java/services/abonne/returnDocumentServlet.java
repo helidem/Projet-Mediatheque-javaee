@@ -28,8 +28,9 @@ public class returnDocumentServlet extends HttpServlet {
         session.setAttribute("messageRetour", "");
         // get document registration form information
         String numeroDocument = request.getParameter("documentARetourner");
-        Document documentARetourner = m.getDocument(Integer.parseInt(numeroDocument));
+
         try {
+            Document documentARetourner = m.getDocument(Integer.parseInt(numeroDocument));
             m.retour(documentARetourner, u);
             session.setAttribute("messageRetour", "Document N°" + numeroDocument + " retourné !");
 
